@@ -30,10 +30,9 @@ const handleApplication = async (req, res, next) => {
       file: file
         ? {
             originalName: file.originalname,
-            fileName: file.filename,
             mimeType: file.mimetype,
             size: file.size,
-            path: file.path,
+            buffer: file.buffer, // in-memory buffer (memoryStorage, no disk path)
           }
         : null,
     };

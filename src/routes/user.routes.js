@@ -1,30 +1,12 @@
 const express = require('express');
 const multer = require('multer');
-const path = require('path');
-const fs = require('fs');
 
 const { handleApplication } = require('../controllers/user.controller');
 
 const router = express.Router();
 
-const uploadDir = path.join(__dirname, '..', '..', 'uploads');
-
-// Multer storage configuration
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    try {
-      fs.mkdirSync(uploadDir, { recursive: true });
-      cb(null, uploadDir);
-    } catch (err) {
-      cb(err);
-    }
-  },
-  filename: (req, file, cb) => {
-    const timestamp = Date.now();
-    const safeOriginalName = file.originalname.replace(/\s+/g, '_');
-    cb(null, `${timestamp}-${safeOriginalName}`);
-  },
-});
+// Use memory storage — no disk writes (required for Vercel serverless)
+const storage = multer.memoryStorage();
 
 // File filter to allow pdf, docs, images
 const fileFilter = (req, file, cb) => {

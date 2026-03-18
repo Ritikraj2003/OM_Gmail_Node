@@ -1,7 +1,6 @@
 // Simple in-memory repository placeholder.
 // Replace with real database logic as needed.
 
-const fs = require('fs');
 const { sendMail } = require('../services/mail.service');
 
 const applications = [];
@@ -28,16 +27,12 @@ const saveApplication = async (application) => {
 
   const attachments = [];
 
-  if (record.file && record.file.path) {
-    try {
-      const fileBuffer = fs.readFileSync(record.file.path);
-      attachments.push({
-        filename: record.file.originalName || record.file.fileName,
-        content: fileBuffer,
-      });
-    } catch (e) {
-      console.error('Failed to read attachment file:', e);
-    }
+  // File is held in RAM (memoryStorage) — use buffer directly, no disk read needed
+  if (record.file && record.file.buffer) {
+    attachments.push({
+      filename: record.file.originalName,
+      content: record.file.buffer,
+    });
   }
 
   // Call email service (TO, Subject, Body, Attachment)
