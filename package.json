@@ -1,6 +1,7 @@
 {
   "name": "om-node-api",
   "version": "1.0.0",
+  "type": "module",
   "description": "Node/Express API for handling frontend application submissions with file upload.",
   "main": "server.js",
   "scripts": {
