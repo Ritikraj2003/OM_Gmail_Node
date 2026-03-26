@@ -17,7 +17,7 @@ export const handleApplication = async (req, res) => {
     if (!file) {
       return res.status(400).json({
         success: false,
-        message: 'PDF file is required.',
+        message: 'PDF or image file is required.',
       });
     }
 
