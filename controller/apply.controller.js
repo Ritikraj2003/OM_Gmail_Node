@@ -23,8 +23,8 @@ export const handleApplication = async (req, res) => {
 
     // 3. Prepare email options
     const mailOptions = {
-      from: process.env.MAIL_FROM || process.env.SMTP_USER,
-      to: process.env.SMTP_USER, // Send to site owner
+      from: process.env.SMTP_USER,
+      to: process.env.MAIL_TO || 'Info@omstructuresolutions.com', // Send to info
       subject: `New Job Application: ${positionOfInterest} - ${name}`,
       text: `
 You have received a new job application.

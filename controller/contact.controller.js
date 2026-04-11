@@ -15,8 +15,8 @@ export const handleContact = async (req, res) => {
 
     // 2. Prepare email options
     const mailOptions = {
-      from: process.env.MAIL_FROM || process.env.SMTP_USER,
-      to: process.env.SMTP_USER, // Send it to the site owner
+      from: process.env.SMTP_USER,
+      to: process.env.MAIL_TO || 'Info@omstructuresolutions.com', // Send to info
       subject: `New Contact Form Submission: ${subject || 'No Subject'}`,
       text: `
 You have received a new contact form submission.
